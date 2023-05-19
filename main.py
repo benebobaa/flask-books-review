@@ -40,7 +40,9 @@ class Review(db.Model):
     rate = db.Column(db.String(50), nullable=False)
     content = db.Column(db.String(500), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
-
+    
+with app.app_context():
+    db.create_all()
 
 @app.route('/books/upload', methods=['POST'])
 def upload_books():
@@ -170,6 +172,4 @@ def index():
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(host="0.0.0.0",port=5000, debug=True)
