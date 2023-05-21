@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'any secret string'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bene2.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///glori.db'
 
 
 
