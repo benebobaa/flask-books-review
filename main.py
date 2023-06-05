@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-app.config['SECRET_KEY'] = 'any secret string'
+# app.config['SECRET_KEY'] = 'any secret string'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///glori.db'
 
 
