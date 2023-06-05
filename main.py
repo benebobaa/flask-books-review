@@ -135,7 +135,7 @@ def get_books():
     return jsonify(result), 200
 
 @app.route('/cms/allbooks', methods=['GET'])
-def get_books():
+def get_cms_books():
     books = Book.query.all()
     result = []
     for book in books:
