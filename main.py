@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify, Response
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = 'any secret string'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///glori.db'
 
@@ -115,6 +117,24 @@ def login():
     return jsonify({'message': 'Login successful'}), 200
 
 @app.route('/books/all', methods=['GET'])
+def get_books():
+    books = Book.query.all()
+    result = []
+    for book in books:
+        book_data = {
+            'id': book.id,
+            'title': book.title,
+            'author': book.author,
+            'image_url': request.host_url + 'books/image/' + str(book.id),
+            # 'img': book.img,
+            # 'filename': book.name,
+            # 'mimetype': book.mimetype,
+            'reviews': [{'user': review.user,'review': review.content, 'rate': review.rate} for review in book.reviews]
+        }
+        result.append(book_data)
+    return jsonify(result), 200
+
+@app.route('/cms/allbooks', methods=['GET'])
 def get_books():
     books = Book.query.all()
     result = []
