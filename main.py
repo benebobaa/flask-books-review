@@ -85,6 +85,19 @@ def register():
 
     return jsonify({'message': 'User registered successfully'}), 201
 
+@app.route('/cms/users', methods=['GET'])
+def all_user():
+    users = User.query.all()
+    result = []
+    for user in users:
+        user_data = {
+            'id': user.id,
+            'username': user.username,
+            'password': user.password
+        }
+        result.append(user_data)
+    return jsonify(result), 200
+
 
 @app.route('/login', methods=['POST'])
 def login():
